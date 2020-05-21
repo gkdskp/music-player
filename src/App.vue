@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<nav-bar />
+	<albums-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavBar from './components/NavBar';
+import AlbumsView from './views/AlbumsView';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+	'nav-bar': NavBar,
+	'albums-view': AlbumsView
+  },
+  data() {
+    return {
+      albums: [{
+        "name": "Kid A",
+      },
+      {
+        "name": "OK Computer",
+      }]
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import url('./assets/theme.css');
 </style>

@@ -1,0 +1,142 @@
+@import url('./colors.css');
+
+body {
+	background: var(--primary-background-color);
+	font-family: 'Open Sans';
+	color: var(--text-color);
+	align-content: center;
+}
+
+
+/* Display */
+.table {
+	display: table;
+	table-layout: fixed;
+}
+
+.row {
+	display: table-row;
+}
+
+.cell {
+	display: table-cell;
+	word-wrap: break-word;
+	padding: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {	
+	background: var(--scrollbar-track-color);
+}
+
+::-webkit-scrollbar-thumb {	
+	background: var(--scrollbar-thumb-color);
+}
+::-webkit-scrollbar-thumb:hover {	
+	background: var(--scrollbar-thumb-hover-color);
+}
+
+/* Custom Colors */
+.secondary-bg {
+	background: var(--secondary-background-color);
+}
+
+
+/* Text Styles */
+h1,
+h2,
+h3 {
+	font-family: Gilroy;
+}
+
+.subtitle-text {
+	color: var(--text-subtitle-color);
+	font-size: 0.9em;
+}
+
+input {
+	font-family: 'Open Sans';
+}
+/* Divisions */
+#navbar {
+	width: 10%;
+	position: fixed;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	overflow: auto;
+}
+
+.route-container {
+	top: 0;
+	left: 13%;
+	width: 85%;
+	position: relative;
+	margin-top: 45px;
+}
+
+.primary-btn {
+	background: var(--primary-hover-color-fallback);
+  background: var(--primary-hover-color);
+  width: 100%;
+	border: 0;
+	padding: 15px 15px;
+	border-radius: 2%;
+	color: var(--text-color);
+	font-size: 1.3em;
+	font-weight: bold;
+	font-family: 'Gilroy';
+}
+
+.primary-btn:hover {
+	background: var(--btn-hover-color-fallback);
+	background: var(--btn-hover-color);
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+/* Miscellaneous */
+.hover-lighten:hover {
+	color: var(--text-color);
+}
+
+.item-hoverable .current,
+.item-hoverable .item:hover {
+	background: var(--primary-hover-color-fallback);
+	background: var(--primary-hover-color);
+}
+
+.secondary-hoverable:hover {
+	background: var(--secondary-hover-color);
+}
+
+.seperated {
+	border-bottom: 0.2px solid var(--seperator-color);
+}
+
+.sticky-top {
+	top: 0;
+	width: 100%;
+	position: sticky;
+	background: var(--primary-background-color);
+	z-index: 5;
+}
+
+.entity-info {
+	position: fixed;
+}
+
+.entity-songs-list {
+	left: 400px;
+	position: relative;
+	width: 75%;
+}
