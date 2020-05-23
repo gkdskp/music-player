@@ -1,6 +1,6 @@
 const chokidar = require('chokidar');
 
-const {addSong, changeSong, deleteSong} = require('./actions');
+import {addSong, changeSong, deleteSong} from './actions';
 
 const watcher = chokidar.watch('/home/gokul/Music');
 

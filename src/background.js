@@ -1,11 +1,16 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import {
   createProtocol,
   /* installVueDevtools */
 } from 'vue-cli-plugin-electron-builder/lib'
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
+const DataStore = require('nedb');
+const path = require('path');
+
+require('./filesystem/watcher');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -88,3 +93,11 @@ if (isDevelopment) {
     })
   }
 }
+
+import {findAlbums} from './data/albums';
+
+ipcMain.on('find-albums', (event) => {
+  findAlbums({}, (albums) => {
+    event.reply('albums-list', albums);
+  })
+})

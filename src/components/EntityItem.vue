@@ -2,7 +2,7 @@
   <div class="entity-item" :class="{singular: isEntityView, circular: isCircular}">
     <div class="entity-container">
       <div class="entity-art-container">
-        <div class="entity-art entity-inner" :style="{backgroundImage: `url('${art}')`}"></div>
+        <div class="entity-art entity-inner" :style="{backgroundImage: `url('file:///${art}')`}"></div>
         <div class="entity-inner button-container">
           <ion-icon name="play" class="play-button"></ion-icon>
         </div>
@@ -30,6 +30,7 @@
 
 export default {
   name: 'EntityItem',
+  
   props: [ 
 	'isEntityView',
 	'isCircular',

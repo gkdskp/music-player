@@ -22,10 +22,12 @@ import SongList from "../components/SongList.vue";
 
 export default {
   name: "AlbumView",
+
   components: {
     "entity-item": EntityItem,
     "song-list": SongList
   },
+  
   data() {
     return {
     };

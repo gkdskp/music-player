@@ -1,4 +1,6 @@
 const fs = require('fs');
+const path = require('path');
+import { app } from 'electron';
 
 const mimeMap = {
 	'image/bmp': 'bmp',
@@ -31,10 +33,11 @@ const mimeMap = {
 
 const storeFile = (image, album, artist) => {
 	const ext = mimeMap[image.format] || image.format;
+	const fileLocation = path.join(app.getPath('userData'), `Thumbnails/${artist}-${album}.${ext}`);
 	if (image) {
-		fs.writeFileSync(`public/data/${artist}-${album}.${ext}`, image.data);
-		return `data/${artist}-${album}.${ext}`;
+		fs.writeFileSync(fileLocation, image.data);
+		return fileLocation;
 	}
 }
 
-module.exports = storeFile;
+export default storeFile;

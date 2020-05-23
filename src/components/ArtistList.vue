@@ -20,9 +20,11 @@ import EntityItem from './EntityItem';
 
 export default {
 	name: 'ArtistList',
+
 	props: [
 		'artists'
 	],
+	
 	components: {
 		'entity-item': EntityItem
 	}

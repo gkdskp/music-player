@@ -107,6 +107,7 @@ input {
 /* Miscellaneous */
 .hover-lighten:hover {
 	color: var(--text-color);
+	cursor: pointer;
 }
 
 .item-hoverable .current,

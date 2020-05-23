@@ -1,6 +1,5 @@
 const mm = require('music-metadata');
-const storeFile = require('./handleArt');
-
+import storeFile from './handleArt';
 
 const getTags = (file) => {
 	return mm.parseFile(file).then(
@@ -19,4 +18,4 @@ const getTags = (file) => {
 	.catch('Couldnt parse metadata');
 }
 
-module.exports = getTags;
+export default getTags;

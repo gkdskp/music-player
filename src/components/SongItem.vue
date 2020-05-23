@@ -26,6 +26,7 @@
 <script>
 export default {
 	name: 'SongItem',
+	
 	props: [
 		'isAlbumView',
 		'trackNum',

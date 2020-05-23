@@ -41,11 +41,13 @@ import SongItem from './SongItem';
 
 export default {
 	name: 'SongList',
+
 	props: [
 		'isAlbumView',
 		'title',
 		'songs',
 	],
+	
 	components: {
 		'song-item': SongItem
 	}
