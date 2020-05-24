@@ -19,8 +19,8 @@
         <p class="entity-desc">{{ desc }}</p>
       </div>
       <div v-else>
-        <a href="#" class="entity-title block">{{ title }}</a>
-        <a href="#" class="entity-artist subtitle-text block">{{ subtitle }}</a>
+        <router-link :to="{name: 'album', params: {albumid: id }}"  class="entity-title block">{{ title }}</router-link>
+        <router-link :to="{name: 'album', params: {albumid: id }}"  class="entity-artist subtitle-text block">{{ subtitle }}</router-link>
       </div>
     </div>
   </div>
@@ -38,7 +38,8 @@ export default {
 	'subtitle',
 	'art',
 	'subsubtitle',
-	'desc'
+  'desc',
+  'id'
   ],
 };
 </script>

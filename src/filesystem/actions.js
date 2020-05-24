@@ -1,4 +1,5 @@
 import { addAlbum } from '../data/albums';
+import { addArtist } from '../data/artists';
 
 import getTags from './tag';
 
@@ -13,8 +14,8 @@ const addSong = path => {
 					year,
 					art: albumArt
 				}
-				addAlbum(Album, () => {
-				});
+				addArtist({ name: Album.artist });
+				addAlbum(Album);
 			}
 		)
 	}

@@ -9,9 +9,9 @@
 				:title='album.title'
 				:art='album.art'
 				:subtitle='album.artist'
+				:id='album._id'
 				:isAlbumView='false'
 				:isCircular='false'
-				:id='index'
 			/>
 		</div>
 	</div>
@@ -29,6 +29,10 @@ export default {
 
 	props: [
 		'albums'
-	]
+	],
+
+	created() {
+		console.log(this.albums);
+	}
 }
 </script>

@@ -6,6 +6,7 @@
         :title="album.title"
         :subtitle="album.artist"
         :subsubtitle="album.year"
+        :art="album.art"
         :desc="album.desc"
         class="album-info"
       />
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import {ipcRenderer} from 'electron';
+
 import EntityItem from "../components/EntityItem.vue";
 import SongList from "../components/SongList.vue";
 
@@ -30,7 +33,15 @@ export default {
   
   data() {
     return {
+      album: {}
     };
+  },
+
+  created() {
+    ipcRenderer.send('find-album', {_id: this.$route.params.albumid});
+    ipcRenderer.on('album-info', (event, args) => {
+      this.album = args;
+    })
   }
 };
 </script>

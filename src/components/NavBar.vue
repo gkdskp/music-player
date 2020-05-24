@@ -3,13 +3,13 @@
     <div class="navbar-container">
       <ul class="item-hoverable">
         <li>
-          <a href="#" class="item current">Albums</a>
+          <router-link to="/" class="item">Albums</router-link>
         </li>
         <li>
           <a href="#" class="item">Songs</a>
         </li>
         <li>
-          <a href="#" class="item">Artists</a>
+          <router-link to="/artists" class="item">Artists</router-link>
         </li>
       </ul>
     </div>
