@@ -1,0 +1,60 @@
+const DataStore = require('nedb');
+const { app } = require('electron');
+const path = require('path')
+
+const songDataStore = new DataStore({
+	filename: path.join(app.getPath('userData'), 'Datastores/songs.db'),
+	autoload: true
+});
+
+const addSong = song => {
+	return new Promise((resolve, reject) => {
+		findSong(song)
+			.then((songDoc) => {
+				if(! songDoc) {
+					songDataStore.update(
+						song,
+						{$set: song},
+						{upsert: true}
+					);
+				}
+				findSong(song)
+					.then((songDoc) => resolve(songDoc));
+			})
+	});
+}
+
+const findSongs = (params, sortByTrackNum) => {
+	return new Promise((resolve, reject) => {
+		const cursor = songDataStore.find(params);
+		const sortedCursor = sortByTrackNum? cursor.sort({trackNum: 1}): cursor.sort({title: 1});
+		sortedCursor.exec((err, docs) => {
+			if(err) {
+				// log error
+				reject();
+			} 
+			else {
+				resolve(docs);
+			}
+		})
+	});
+}
+
+const findSong = params => {
+	return new Promise((resolve, reject) => {
+		songDataStore.findOne(params, (err, doc) => {
+			if(err) {
+				// log error
+				reject(err);
+			}
+			// else if(doc) {
+			// 	resolve(doc);
+			// }
+			else {
+				resolve(doc);
+			}
+		})
+	});
+}
+
+export { addSong, findSongs, findSong };

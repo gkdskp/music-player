@@ -1,23 +1,35 @@
 import { ipcMain } from 'electron';
-import {findAlbums, findAlbum} from './data/albums';
-import { findArtists } from './data/artists';
-const fs = require('fs');
+import { getAlbumInfo, getAlbums } from './data/albums';
+import { findArtists, findArtist } from './data/artists';
+import { findSongs } from './data/songs';
+// const fs = require('fs');
 
 ipcMain.on('find-albums', (event) => {
-  findAlbums({}, (albums) => {
+  getAlbums({}).then((albums) => {
     event.reply('albums-list', albums);
   })
 })
 
 ipcMain.on('find-artists', (event) => {
-  findArtists({}, (artists) => {
+  findArtists({}).then((artists) => {
     event.reply('artists-list', artists);
   })
 })
 
-ipcMain.on('find-album', (event, args) => {
-  fs.writeFileSync('a.txt', args);
-  findAlbum(args, (album) => {
+ipcMain.on('find-album', (event, id) => {
+  getAlbumInfo(id, true).then((album) => {
     event.reply('album-info', album);
   })
+})
+
+ipcMain.on('find-artist', (event, args) => {
+  findArtist(args).then((artist) => {
+    event.reply('artist-info', artist);
+  })
+})
+
+ipcMain.on('find-songs', event => {
+  findSongs({}).then(songs =>
+    event.reply('songs-list', songs)  
+  );
 })

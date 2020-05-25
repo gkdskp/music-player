@@ -5,7 +5,8 @@ import App from './App.vue'
 import AlbumView from './views/AlbumView';
 import AlbumsView from './views/AlbumsView';
 import ArtistsView from './views/ArtistsView';
-// import ArtistView from './views/ArtistView';
+import ArtistView from './views/ArtistView';
+import SongsView from './views/SongsView';
 
 
 require('vue-ionicons/ionicons.css')
@@ -19,17 +20,29 @@ const router = new VueRouter({
   mode: 'hash',
   base: __dirname,
   routes: [
-
+    {
+      path: "/",
+      redirect: "/album"
+    },
+    {
+      path: '/songs/',
+      component: SongsView
+    },
+    {
+      path: '/artists/:id',
+      name: 'artist',
+      component: ArtistView
+    },
     {
       path: '/artists',
-      component: ArtistsView
+      component: ArtistsView,
     },
     {
-      path: '/',
-      component: AlbumsView
+      path: '/album',
+      component: AlbumsView,
     },
     {
-      path: '/album/:albumid',
+      path: '/album/:id',
       name: "album",
       component: AlbumView
     }

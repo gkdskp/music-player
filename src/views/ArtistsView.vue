@@ -23,10 +23,8 @@ export default {
 	},
 
 	created() {
-		console.log("LOL")
 		ipcRenderer.send('find-artists');
 		ipcRenderer.on('artists-list', (event, args) => {
-			console.log("Yaay")
 			this.artists = args;
 		})
 	}

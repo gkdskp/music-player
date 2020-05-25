@@ -8,11 +8,13 @@
         :subsubtitle="album.year"
         :art="album.art"
         :desc="album.desc"
+        subroute="artist"
+        :subid="album.artistid"
         class="album-info"
       />
     </div>
     <div class="entity-songs-list">
-      <song-list :isAlbumView="true" :songs="songs" title="Songs" class="song-list-item" />
+      <song-list :isAlbumView="true" :songs="album.songs" class="song-list-item" />
     </div>
   </div>
 </template>
@@ -38,8 +40,9 @@ export default {
   },
 
   created() {
-    ipcRenderer.send('find-album', {_id: this.$route.params.albumid});
+    ipcRenderer.send('find-album',  this.$route.params.id);
     ipcRenderer.on('album-info', (event, args) => {
+      console.log(args);
       this.album = args;
     })
   }

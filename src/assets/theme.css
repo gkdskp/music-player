@@ -1,4 +1,4 @@
-@import url('./colors.css');
+@import url('./light.css');
 
 body {
 	background: var(--primary-background-color);

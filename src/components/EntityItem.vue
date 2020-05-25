@@ -1,8 +1,14 @@
 <template>
-  <div class="entity-item" :class="{singular: isEntityView, circular: isCircular}">
+  <div
+    class="entity-item"
+    :class="{ singular: isEntityView, circular: isCircular }"
+  >
     <div class="entity-container">
       <div class="entity-art-container">
-        <div class="entity-art entity-inner" :style="{backgroundImage: `url('file:///${art}')`}"></div>
+        <div
+          class="entity-art entity-inner"
+          :style="{ backgroundImage: `url('file:///${art}')` }"
+        ></div>
         <div class="entity-inner button-container">
           <ion-icon name="play" class="play-button"></ion-icon>
         </div>
@@ -10,7 +16,10 @@
 
       <div v-if="isEntityView">
         <span class="entity-title block">{{ title }}</span>
-        <span class="entity-artist subtitle-text block" v-if="!isCircular">{{ subtitle }}</span>
+        <router-link
+          :to="{ name: subroute, params: { id: subid } }" class="entity-artist subtitle-text block" v-if="!isCircular">{{
+          subtitle
+        }}</router-link>
         <span class="subtitle-text block">{{ subsubtitle }}</span>
         <button class="primary-btn">
           <ion-icon name="play" />&nbsp;&nbsp;Play
@@ -19,27 +28,37 @@
         <p class="entity-desc">{{ desc }}</p>
       </div>
       <div v-else>
-        <router-link :to="{name: 'album', params: {albumid: id }}"  class="entity-title block">{{ title }}</router-link>
-        <router-link :to="{name: 'album', params: {albumid: id }}"  class="entity-artist subtitle-text block">{{ subtitle }}</router-link>
+        <router-link
+          :to="{ name: route, params: { id: id } }"
+          class="entity-title block"
+          >{{ title }}</router-link
+        >
+        <router-link
+          :to="{ name: subroute, params: { id: 'dc90uBWfcpIcTNrc' } }"
+          class="entity-artist subtitle-text block"
+          >{{ subtitle }}</router-link
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'EntityItem',
-  
-  props: [ 
-	'isEntityView',
-	'isCircular',
-	'title',
-	'subtitle',
-	'art',
-	'subsubtitle',
-  'desc',
-  'id'
+  name: "EntityItem",
+
+  props: [
+    "isEntityView",
+    "isCircular",
+    "title",
+    "subtitle",
+    "art",
+    "subsubtitle",
+    "desc",
+    "id",
+    "subid",
+    "route",
+    "subroute",
   ],
 };
 </script>

@@ -12,6 +12,8 @@
 				:id='album._id'
 				:isAlbumView='false'
 				:isCircular='false'
+				route='album'
+				subroute='artist'
 			/>
 		</div>
 	</div>
@@ -30,9 +32,5 @@ export default {
 	props: [
 		'albums'
 	],
-
-	created() {
-		console.log(this.albums);
-	}
 }
 </script>
