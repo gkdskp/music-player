@@ -29,6 +29,7 @@
 				:trackNum="isAlbumView? song.trackNum: index"
 				:title="song.title"
 				:songAlbum="song.album"
+				:songArtists="song.performer"
 				duration="01:00"
 			/>
 		</div>

@@ -14,6 +14,7 @@
 				:isCircular='false'
 				route='album'
 				subroute='artist'
+				:subid='album.artistid'
 			/>
 		</div>
 	</div>

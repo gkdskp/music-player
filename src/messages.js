@@ -1,7 +1,7 @@
 import { ipcMain } from 'electron';
 import { getAlbumInfo, getAlbums } from './data/albums';
-import { findArtists, findArtist } from './data/artists';
-import { findSongs } from './data/songs';
+import { findArtists, findArtist, getArtist } from './data/artists';
+import { getSongs } from './data/songs';
 // const fs = require('fs');
 
 ipcMain.on('find-albums', (event) => {
@@ -23,13 +23,13 @@ ipcMain.on('find-album', (event, id) => {
 })
 
 ipcMain.on('find-artist', (event, args) => {
-  findArtist(args).then((artist) => {
+  getArtist(args).then((artist) => {
     event.reply('artist-info', artist);
   })
 })
 
 ipcMain.on('find-songs', event => {
-  findSongs({}).then(songs =>
+  getSongs({}).then(songs =>
     event.reply('songs-list', songs)  
   );
 })

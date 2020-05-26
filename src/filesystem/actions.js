@@ -4,31 +4,19 @@ import { addSong } from '../data/songs';
 
 import getTags from './tag';
 
-const importSong = path => {
+const importSong = async path => {
 	if (path.match('mp3')) {
-		getTags(path).then(
-			song => {
-				const { album, artist, year, albumArt } = song;
-				const Album = {
-					title: album,
-					year,
-					art: albumArt
-				}
-				addArtist({ name: artist })
-					.then(
-						artistDoc => {
-							Album.artistid = artistDoc? artistDoc._id: null;
-							return addAlbum(Album);
-						}
-					)
-					.then(
-						albumDoc => {
-							song.album = albumDoc? albumDoc._id: null,
-							addSong(song)
-						}
-					);
-			}
-		)
+		const song = await getTags(path);
+		const { album, artist, year, albumArt } = song;
+		const Album = {
+			title: album,
+			year,
+			art: albumArt
+		}
+
+		Album.artistid = (await addArtist({name: artist}))._id;		
+		song.album = (await addAlbum(Album))._id;
+		addSong(song);
 	}
 }
 

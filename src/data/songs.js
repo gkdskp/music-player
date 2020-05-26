@@ -1,3 +1,6 @@
+import { findAlbum } from './albums';
+
+
 const DataStore = require('nedb');
 const { app } = require('electron');
 const path = require('path')
@@ -57,4 +60,11 @@ const findSong = params => {
 	});
 }
 
-export { addSong, findSongs, findSong };
+const getSongs = async (param, sortByTrackNum) => {
+	const songs = await findSongs(param, sortByTrackNum);
+	for(let i = 0; i < songs.length; i++)
+		songs[i].album = (await findAlbum({_id: songs[i].album})).title;
+	return songs;
+}
+
+export { addSong, findSongs, findSong, getSongs };

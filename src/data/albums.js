@@ -26,13 +26,14 @@ const addAlbum = album => {
 				albumDoc => {
 					if (!albumDoc) {
 						albumDataStore.update(
-							{ title: album.title, artistid: album.artistid },
+							album,
 							{ $set: album },
 							{ upsert: true },
 						);
 					}
 					findAlbum(album).then(
-						albumDoc => resolve(albumDoc)
+						albumDoc => 
+							resolve(albumDoc)
 					);
 				});
 		});
@@ -44,6 +45,7 @@ const findAlbums = params => {
 			albumDataStore.find(params).sort({title: 1}).exec((err, docs) => {
 				if (err) {
 					// log
+					console.log(err);
 					reject();
 				} else {
 					resolve(docs);
@@ -79,7 +81,10 @@ const getAlbumInfo = async (id, songList) => {
 
 const getAlbums = async param => {
 	const docs = await findAlbums(param);
+	for(let i = 0; i < docs.length; i++) {
+		docs[i].artist = (await findArtist({_id: docs[i].artistid})).name;
+	}
 	return docs;
 }
 
-export { addAlbum, getAlbums, findAlbum, getAlbumInfo };
+export { addAlbum, getAlbums, findAlbum, findAlbums, getAlbumInfo };
