@@ -11,14 +11,6 @@ const albumDataStore = new DataStore({
 	autoload: true
 });
 
-// const addAlbum = (albumDoc) => {
-// 	albumDataStore.update(
-// 		{ title: albumDoc.title, artist: albumDoc.artist },
-// 		{ $set: albumDoc },
-// 		{ upsert: true },
-// 	);
-// }
-
 const addAlbum = album => {
 	return new Promise(
 		(resolve, reject) => {
