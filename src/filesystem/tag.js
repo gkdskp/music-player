@@ -8,7 +8,7 @@ const getTags = (file) => {
 			return {
 				album: tag.common.album || 'Unknown Album',
 				artist: tag.common.albumartist || 'Unknown Artist',
-				performer: tag.common.artist,
+				performer: tag.common.artist || tag.common.albumartist || 'Unknown Artist',
 				trackNum: tag.common.track.no || '',
 				title: tag.common.title || path.basename(file),
 				year: tag.common.year || 'Unknown Year',

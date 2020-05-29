@@ -7,10 +7,11 @@
       <div class="entity-art-container">
         <div
           class="entity-art entity-inner"
+          v-if="art"
           :style="{ backgroundImage: `url('file:///${art}')` }"
         ></div>
-        <div class="entity-inner button-container">
-          <ion-icon name="play" class="play-button"></ion-icon>
+        <div class="entity-inner button-container" v-if="!isEntityView || !art">
+          <ion-icon name="play-sharp" class="play-button"></ion-icon>
         </div>
       </div>
 
@@ -22,7 +23,7 @@
         }}</router-link>
         <span class="subtitle-text block">{{ subsubtitle }}</span>
         <button class="primary-btn">
-          <ion-icon name="play" />&nbsp;&nbsp;Play
+          <ion-icon name="play-sharp" />&nbsp;&nbsp;Play
         </button>
 
         <p class="entity-desc">{{ desc }}</p>
@@ -34,7 +35,7 @@
           >{{ title }}</router-link
         >
         <router-link
-          :to="{ name: subroute, params: { id: 'dc90uBWfcpIcTNrc' } }"
+          :to="{ name: subroute, params: { id: subid } }"
           class="entity-artist subtitle-text block"
           >{{ subtitle }}</router-link
         >
@@ -131,10 +132,6 @@ export default {
   position: relative;
 }
 
-.entity-item.singular .button-container {
-  display: none;
-}
-
 .entity-inner {
   position: absolute;
   width: 100%;
@@ -142,7 +139,6 @@ export default {
 }
 
 .entity-title {
-  font-weight: bold;
   margin: 9px 0px 3px 0px;
   text-decoration: none;
   font-weight: bolder;

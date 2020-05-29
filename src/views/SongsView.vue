@@ -27,7 +27,7 @@ export default {
 
 	created() {
 		ipcRenderer.send('find-songs');
-		ipcRenderer.on('songs-list', (event, args) => {
+		ipcRenderer.once('songs-list', (event, args) => {
 			console.log(args);
 			this.songs = args
 		})

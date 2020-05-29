@@ -35,11 +35,6 @@ export default {
   data() {
     return {
       playlists: [
-        "Favourites",
-        "Recently Added",
-        "Recently Played",
-        "Rock",
-        "Synth Pop"
       ]
     };
   }

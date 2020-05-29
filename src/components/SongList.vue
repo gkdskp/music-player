@@ -1,7 +1,7 @@
 <template>
 	<div class="list-container">
 		<div class="sticky-top">
-			<h1 v-if="title">{{ title }}</h1>
+			<h1 v-if="title" class="list-title">{{ title }}</h1>
 			<div
 				class="table seperated subtitle-text"
 				:class="{'album-view': isAlbumView}"
@@ -60,6 +60,9 @@ export default {
 	padding: 20px 10px 20px 10px;
 }
 
+.list-title {
+	padding-top: 30px;
+}
 
 .num-cell {
 	width: 6%;
@@ -92,7 +95,4 @@ export default {
 	padding-right: 20px;
 }
 
-.title {
-	padding-top: 30px;
-}
 </style>

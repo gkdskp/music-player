@@ -24,7 +24,7 @@ export default {
 
 	created() {
 		ipcRenderer.send('find-artists');
-		ipcRenderer.on('artists-list', (event, args) => {
+		ipcRenderer.once('artists-list', (event, args) => {
 			this.artists = args;
 		})
 	}

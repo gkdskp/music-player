@@ -1,4 +1,4 @@
-@import url('./colors.css');
+@import url('./light.css');
 
 body {
 	background: var(--primary-background-color);
@@ -64,7 +64,7 @@ input {
 #navbar {
 	width: 10%;
 	position: fixed;
-	height: 100vh;
+	height: 92vh;
 	top: 0;
 	left: 0;
 	overflow: auto;
@@ -72,10 +72,15 @@ input {
 
 .route-container {
 	top: 0;
-	left: 13%;
-	width: 85%;
+	left: 10%;
+
+	width: 86%;
+	padding-right: 1%;
+	height: 88vh;
 	position: relative;
-	margin-top: 45px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-left: 3%;
 }
 
 .primary-btn {

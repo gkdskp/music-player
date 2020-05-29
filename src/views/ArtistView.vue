@@ -42,7 +42,7 @@ export default {
 
 	created() {
 		ipcRenderer.send('find-artist', {_id: this.$route.params.id});
-		ipcRenderer.on('artist-info', (event, args) => {
+		ipcRenderer.once('artist-info', (event, args) => {
 			this.artist = args;
 		})
 	}

@@ -41,7 +41,7 @@ export default {
 
   created() {
     ipcRenderer.send('find-album',  this.$route.params.id);
-    ipcRenderer.on('album-info', (event, args) => {
+    ipcRenderer.once('album-info', (event, args) => {
       console.log(args);
       this.album = args;
     })
