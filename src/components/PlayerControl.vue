@@ -3,7 +3,7 @@
     <div class="info-container">
       <div class="song-art">
         <img
-          src="file:////home/gokul/.config/music-player/Thumbnails/Blur-13 (Special Edition).jpeg"
+          :src="`file:///${currSong.albumArt}`"
         />
       </div>
       <div class="song-info">
@@ -16,7 +16,7 @@
         <ion-icon
           name="play-back-sharp"
           class="play-button"
-          @click="replay"
+          @click="prev"
         ></ion-icon>
         <ion-icon
           name="pause-sharp"
@@ -30,7 +30,7 @@
           v-else
           @click="toggle"
         ></ion-icon>
-        <ion-icon name="play-forward-sharp" class="play-button"></ion-icon>
+        <ion-icon name="play-forward-sharp" class="play-button" @click="next"></ion-icon>
       </div>
 
       <div class="slider-container">
@@ -38,22 +38,25 @@
         <div class="slider">
           <vue-slider
             v-model="progress"
-            @click.native="seek"
-            @callback="seek"
+            @change="seek"
+            :drag-on-click="true"
+            tooltip="none"
           />
         </div>
         <div class="duration-info subtitle-text">{{ totalDuration }}</div>
       </div>
     </div>
     <div class="x"></div>
-    <audio ref="audioPlayer">
-      <source :src="currSong.file" type="audio/mpeg" />
+    <audio ref="audioPlayer" preload="auto">
+      <source :src="`file:///${currSong.file}`" type="audio/mpeg" />
     </audio>
   </div>
 </template>
 
 <script>
 import { AudioPlayer, PlayerEvents } from "../player/control";
+import  PlayQueue  from '../player/playqueue';
+
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
 
@@ -76,10 +79,10 @@ export default {
 
   mounted() {
      PlayerEvents.on("player:loading", () => {
-      this.currSong = AudioPlayer.song;
     });
 
     PlayerEvents.on("player:loaded", () => {
+      this.currSong = AudioPlayer.song;
       this.totalDuration = AudioPlayer.totalDuration;
     });
 
@@ -93,7 +96,7 @@ export default {
     });
 
     AudioPlayer.setAudioPlayer(this.$refs.audioPlayer);
-    AudioPlayer.setAudioFile();
+    PlayQueue.setCurrent(0);
   },
 
   methods: {
@@ -105,42 +108,18 @@ export default {
       AudioPlayer.toggle();
     },
 
-    seek() {
-      AudioPlayer.seek(this.progress);
+    seek(newProgress) {
+      AudioPlayer.seek(newProgress);
     },
+
+    next() {
+      PlayQueue.setNext();
+    },
+
+    prev() {
+      PlayQueue.setPrev();
+    }
   },
-
-  //   mounted() {
-  //     player.setAudioPlayer(this.$refs.audioPlayer);
-  //     player.emitter.on("playback:progress", (args) => {
-  //       this.duration = args.time;
-  //       this.time = isNaN(args.progress) ? 0 : args.progress;
-  //     });
-  //     player.emitter.on("player:load", () => {
-  //       this.totalDuration = player.duration;
-  //     });
-  //   },
-
-  //   methods: {
-  //     togglePlay() {
-  //       player.toggle();
-  //       this.isPlaying = player.isPlaying;
-  //     },
-
-  //     replay() {
-  //       player.replay();
-  //       this.isPlaying = player.isPlaying;
-  //     },
-
-  //     seek() {
-  //       player.seek(this.time);
-  //     },
-
-  //     changeSong() {
-  //       this.index++;
-  //       player.reload();
-  //     },
-  //   },
 };
 </script>
 

@@ -13,7 +13,8 @@ const getTags = (file) => {
 				title: tag.common.title || path.basename(file),
 				year: tag.common.year || 'Unknown Year',
 				file,
-				albumArt: tag.common.picture? storeFile(tag.common.picture[0], tag.common.album, tag.common.albumartist) : ''
+				albumArt: tag.common.picture? storeFile(tag.common.picture[0], tag.common.album, tag.common.albumartist) : '',
+				duration: tag.format.duration
 			}
 		}
 	)

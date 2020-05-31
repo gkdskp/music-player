@@ -30,7 +30,6 @@
 				:title="song.title"
 				:songAlbum="song.album"
 				:songArtists="song.performer"
-				duration="01:00"
 			/>
 		</div>
 	</div>
@@ -50,7 +49,8 @@ export default {
 	
 	components: {
 		'song-item': SongItem
-	}
+	},
+	
 }
 </script>
 
