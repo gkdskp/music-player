@@ -1,9 +1,29 @@
-import { EventEmitter } from "electron";
+import { EventEmitter } from "events";
 
-const eventEmitter = new EventEmitter();
+const PlayerEvents = new EventEmitter();
 
-const playing = () => {
-	eventEmitter.emit('playing');
+const emitPlayingEvent = () => {
+	PlayerEvents.emit('player:playing');
 }
 
-const 
+const emitLoadStartEvent = () => {
+	console.log('Emitting')
+	PlayerEvents.emit('player:loading');
+}
+
+const emitLoadEndEvent = () => {
+	PlayerEvents.emit('player:loaded');
+}
+
+
+const emitStateChangeEvent = () => {
+	PlayerEvents.emit('player:toggle');
+}
+
+export {
+	PlayerEvents,
+	emitPlayingEvent,
+	emitLoadStartEvent,
+	emitLoadEndEvent,
+	emitStateChangeEvent
+};

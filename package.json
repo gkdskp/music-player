@@ -20,6 +20,7 @@
     "vue": "^2.6.11",
     "vue-ionicons": "^3.0.4",
     "vue-router": "^3.2.0",
+    "vue-slider-component": "^3.1.4",
     "web-audio-player": "^1.3.3"
   },
   "devDependencies": {

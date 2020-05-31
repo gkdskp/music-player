@@ -1,4 +1,4 @@
-@import url('./light.css');
+@import url('./colors.css');
 
 body {
 	background: var(--primary-background-color);
@@ -75,12 +75,12 @@ input {
 	left: 10%;
 
 	width: 86%;
-	padding-right: 1%;
-	height: 88vh;
+	padding-right: 2%;
+	height: 92vh;
 	position: relative;
 	overflow-y: auto;
 	overflow-x: hidden;
-	padding-left: 3%;
+	padding-left: 2%;
 }
 
 .primary-btn {
