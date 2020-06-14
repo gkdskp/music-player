@@ -26,10 +26,12 @@
 				v-for="(song, index) in songs"
 				:key="index"
 				:isAlbumView="isAlbumView"
-				:trackNum="isAlbumView? song.trackNum: index"
+				:trackNum="isAlbumView? (song.trackNum || index+1): index+1"
 				:title="song.title"
 				:songAlbum="song.album"
 				:songArtists="song.performer"
+				:file="song.file"
+				@click.native="setSong(song)"
 			/>
 		</div>
 	</div>
@@ -37,6 +39,7 @@
 
 <script>
 import SongItem from './SongItem';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'SongList',
@@ -49,6 +52,10 @@ export default {
 	
 	components: {
 		'song-item': SongItem
+	},
+
+	methods: {
+		...mapMutations(['setSong']),
 	},
 	
 }

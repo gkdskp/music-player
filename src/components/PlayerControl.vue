@@ -1,23 +1,17 @@
 <template>
   <div id="control-container">
     <div class="info-container">
-      <div class="song-art">
-        <img
-          :src="`file:///${currSong.albumArt}`"
-        />
+      <div class="song-art" v-if="currSong.file">
+        <img :src="`file:///${currSong.albumArt}`" />
       </div>
-      <div class="song-info">
+      <div class="song-info" >
         <span class="title">{{ currSong.title }}</span>
         <span class="artist subtitle-text">{{ currSong.artist }}</span>
       </div>
     </div>
     <div class="actions-container">
       <div class="controls-container">
-        <ion-icon
-          name="play-back-sharp"
-          class="play-button"
-          @click="prev"
-        ></ion-icon>
+        <ion-icon name="play-back-sharp" class="play-button"></ion-icon>
         <ion-icon
           name="pause-sharp"
           class="play-button"
@@ -27,21 +21,20 @@
         <ion-icon
           name="play-sharp"
           class="play-button"
-          v-else
           @click="toggle"
+          v-else
         ></ion-icon>
-        <ion-icon name="play-forward-sharp" class="play-button" @click="next"></ion-icon>
+        <ion-icon
+          name="play-forward-sharp"
+          class="play-button"
+          @click="playNext"
+        ></ion-icon>
       </div>
 
       <div class="slider-container">
         <div class="duration-info subtitle-text">{{ currentTime }}</div>
         <div class="slider">
-          <vue-slider
-            v-model="progress"
-            @change="seek"
-            :drag-on-click="true"
-            tooltip="none"
-          />
+          <vue-slider v-model="progress" @change="seek" :drag-on-click="true" tooltip="none" />
         </div>
         <div class="duration-info subtitle-text">{{ totalDuration }}</div>
       </div>
@@ -54,8 +47,10 @@
 </template>
 
 <script>
-import { AudioPlayer, PlayerEvents } from "../player/control";
-import  PlayQueue  from '../player/playqueue';
+//import { AudioPlayer, PlayerEvents } from "../player/control";
+//import  PlayQueue  from '../player/playqueue';
+import { timeParse } from "../utils/timeparse";
+import { mapGetters } from "vuex";
 
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
@@ -73,53 +68,94 @@ export default {
       currentTime: "00:00",
       totalDuration: "00:00",
       progress: 0,
-      currSong: {},
     };
   },
 
+  computed: mapGetters(["playQueue", "currSong"]),
+
   mounted() {
-     PlayerEvents.on("player:loading", () => {
+    //  PlayerEvents.on("player:loading", () => {
+    // });
+
+    // PlayerEvents.on("player:loaded", () => {
+    //   this.currSong = AudioPlayer.song;
+    //   this.totalDuration = AudioPlayer.totalDuration;
+    // });
+
+    // PlayerEvents.on("player:toggle", () => {
+    //   this.isPlaying = AudioPlayer.isPlaying;
+    // });
+
+    // PlayerEvents.on("player:playing", () => {
+    //   this.progress = AudioPlayer.progress;
+    //   this.currentTime = AudioPlayer.currentTime;
+    // });
+
+    // AudioPlayer.setAudioPlayer(this.$refs.audioPlayer);
+    // PlayQueue.setCurrent(0);
+    //this.totalDuration = '00:50';
+    this.$refs.audioPlayer.addEventListener("timeupdate", () => {
+      this.currentTime = timeParse(this.$refs.audioPlayer.currentTime * 10);
+      this.progress =
+        (this.$refs.audioPlayer.currentTime / this.$refs.audioPlayer.duration) *
+        100;
     });
 
-    PlayerEvents.on("player:loaded", () => {
-      this.currSong = AudioPlayer.song;
-      this.totalDuration = AudioPlayer.totalDuration;
+    this.$refs.audioPlayer.addEventListener("loadedmetadata", () => {
+      this.totalDuration = timeParse(this.$refs.audioPlayer.duration * 10);
     });
 
-    PlayerEvents.on("player:toggle", () => {
-      this.isPlaying = AudioPlayer.isPlaying;
+    this.$refs.audioPlayer.addEventListener("play", () => {
+      this.isPlaying = true;
     });
 
-    PlayerEvents.on("player:playing", () => {
-      this.progress = AudioPlayer.progress;
-      this.currentTime = AudioPlayer.currentTime;
+    this.$refs.audioPlayer.addEventListener("pause", () => {
+      this.isPlaying = false;
     });
+  },
 
-    AudioPlayer.setAudioPlayer(this.$refs.audioPlayer);
-    PlayQueue.setCurrent(0);
+  created() {
+  },
+  updated() {
   },
 
   methods: {
-    replay() {
-      AudioPlayer.restart();
-    },
+    // replay() {
+    //   AudioPlayer.restart();
+    // },
 
     toggle() {
-      AudioPlayer.toggle();
+      !this.isPlaying ? this.$refs.audioPlayer.play() : this.$refs.audioPlayer.pause();
     },
 
-    seek(newProgress) {
-      AudioPlayer.seek(newProgress);
+    // seek(newProgress) {
+    //   AudioPlayer.seek(newProgress);
+    // },
+
+    // next() {
+    //   PlayQueue.setNext();
+    // },
+
+    load(autoPlay) {
+      this.$refs.audioPlayer.load();
+      if(autoPlay) this.$refs.audioPlayer.play();
     },
 
-    next() {
-      PlayQueue.setNext();
+    playNext() {
+      this.$store.commit("playNext");
+      this.load(this.isPlaying);
     },
 
-    prev() {
-      PlayQueue.setPrev();
+    seek(value) {
+      this.$refs.audioPlayer.currentTime = value * this.$refs.audioPlayer.duration/ 100;
     }
   },
+
+  watch: {
+    currSong() {
+      this.load(true);
+    }
+  }
 };
 </script>
 

@@ -9387,6 +9387,11 @@ vue-cli-plugin-electron-builder@~1.4.6:
     webpack-chain "^5.0.0"
     yargs "^14.0.0"
 
+vue-devtools@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/vue-devtools/-/vue-devtools-5.1.3.tgz#9f172b420ca87cec4737968769db8080e6e6f7a7"
+  integrity sha512-5hfJ4JiPn9hL3CFjrmdx6UOqZATjqBYNSC8ZyGgwnqO2jQ4VfX/9k6KZcxPTWeyHDIX7D4BEIYP0fgrJL3RKTw==
+
 vue-eslint-parser@^7.0.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-7.1.0.tgz#9cdbcc823e656b087507a1911732b867ac101e83"
@@ -9464,6 +9469,11 @@ vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
+
+vuex@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.4.0.tgz#20cc086062d750769fce1febb34e7fceeaebde45"
+  integrity sha512-ajtqwEW/QhnrBZQsZxCLHThZZaa+Db45c92Asf46ZDXu6uHXgbfVuBaJ4gzD2r4UX0oMJHstFwd2r2HM4l8umg==
 
 watchpack-chokidar2@^2.0.0:
   version "2.0.0"

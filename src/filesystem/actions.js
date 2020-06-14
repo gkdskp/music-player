@@ -5,7 +5,7 @@ import { addSong } from '../data/songs';
 import getTags from './tag';
 
 const importSong = async path => {
-	if (path.match('mp3')) {
+	if (path.match('mp3') || path.match('.flac')) {
 		const song = await getTags(path);
 		const { album, artist, year, albumArt } = song;
 		const Album = {

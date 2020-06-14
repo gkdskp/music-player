@@ -33,8 +33,16 @@ export default {
 		'title',
 		'songAlbum',
 		'songArtists',
-		'duration'
-	]
+		'duration',
+		'file'
+	],
+
+	mounted() {
+		//console.log(this.props);
+	},
+
+	methods: {
+	}
 }
 </script>
 

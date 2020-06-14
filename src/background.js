@@ -7,7 +7,7 @@ import {
 } from 'vue-cli-plugin-electron-builder/lib'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
-const DataStore = require('nedb');
+const os = require('os');
 const path = require('path');
 
 require('./filesystem/watcher');
@@ -76,7 +76,9 @@ app.on('ready', async () => {
     // } catch (e) {
     //   console.error('Vue Devtools failed to install:', e.toString())
     // }
-
+    BrowserWindow.addDevToolsExtension(
+      path.join(os.homedir(), '.config/google-chrome/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/5.3.3_0')
+    )
   }
   createWindow()
 })
