@@ -1,0 +1,15 @@
+:root {
+	--primary-background-color: #23272A;
+	--secondary-background-color: #36393F;
+	--text-color: #FFFFFF;
+	--text-subtitle-color: #D8DEE9;
+	--primary-hover-color: linear-gradient(to right, #0083B0, #00B4DB);
+	--primary-hover-color-fallback:#00B4DB;
+	--btn-hover-color-fallback: #21D4FD;
+	--btn-hover-color: linear-gradient(to left, #0083B0, #00B4DB);
+	--secondary-hover-color: rgb(52, 54, 56);
+	--seperator-color: rgb(80, 80, 80);
+	--scrollbar-track-color: #f1f1f1;
+	--scrollbar-thumb-color: #888;
+	--scrollbar-thumb-hover-color: #555;
+}
