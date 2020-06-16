@@ -7,6 +7,8 @@
         :subtitle="album.artist"
         :subsubtitle="album.year"
         :art="album.art"
+        :id="album._id"
+        route="album"
         :desc="album.desc"
         subroute="artist"
         :subid="album.artistid"

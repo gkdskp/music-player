@@ -2,7 +2,7 @@ import { findAlbum } from './albums';
 
 
 const DataStore = require('nedb');
-const { app } = require('electron');
+const { app } = require('electron')
 const path = require('path')
 
 const songDataStore = new DataStore({
@@ -11,7 +11,7 @@ const songDataStore = new DataStore({
 });
 
 const addSong = song => {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		findSong(song)
 			.then((songDoc) => {
 				if(! songDoc) {

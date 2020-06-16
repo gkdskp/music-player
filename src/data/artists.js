@@ -1,4 +1,4 @@
-const fs = require('fs');
+//const fs = require('fs');
 const DataStore = require('nedb');
 const { app } = require('electron');
 const path = require('path')
@@ -11,7 +11,7 @@ const artistDataStore = new DataStore({
 });
 
 const addArtist = artist => {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		findArtist(artist)
 			.then((artistDoc) => {
 				if (!artistDoc) {
@@ -54,6 +54,19 @@ const getArtist = async params => {
 	return artist;
 }
 
+const getArtistSongs = async params => {
+	const artist = await findArtist({_id: params});
+	const albums = await findAlbums({artistid: artist._id});
+	let songs = [];
+
+	for(let i = 0; i < albums.length; i++) {
+		const album = (await getAlbumInfo(albums[i]._id, true));
+		songs.push(...album.songs);
+	}
+
+	return songs;
+}
+
 const findArtist = params => {
 	return new Promise((resolve, reject) => {
 		artistDataStore.findOne(params, (err, doc) => {
@@ -73,4 +86,4 @@ const findArtist = params => {
 
 
 
-export { addArtist, findArtists, findArtist, getArtist };
+export { addArtist, findArtists, findArtist, getArtistSongs, getArtist };

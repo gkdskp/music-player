@@ -10,6 +10,8 @@
 				:isCircular='true'
 				:title='artist.name'
 				:art='artist.art'
+				:id='artist._id'
+				route='artist'
 			/>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-const fs = require('fs');
+//const fs = require('fs');
 const DataStore = require('nedb');
 const { app } = require('electron');
 const path = require('path')
@@ -13,7 +13,7 @@ const albumDataStore = new DataStore({
 
 const addAlbum = album => {
 	return new Promise(
-		(resolve, reject) => {
+		(resolve) => {
 			findAlbum(album).then(
 				albumDoc => {
 					if (!albumDoc) {
@@ -66,7 +66,7 @@ const getAlbumInfo = async (id, songList) => {
 	// );
 	const albumDoc = await findAlbum({ _id: id });
 	if (songList)
-		albumDoc.songs = await findSongs({ album: id }, true);;
+		albumDoc.songs = await findSongs({ album: id }, true);
 	albumDoc.artist = (await findArtist({ _id: albumDoc.artistid })).name;
 	return albumDoc
 }

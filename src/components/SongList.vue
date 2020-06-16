@@ -31,6 +31,7 @@
 				:songAlbum="song.album"
 				:songArtists="song.performer"
 				:file="song.file"
+				:duration="song.duration"
 				@click.native="setSong(song)"
 			/>
 		</div>

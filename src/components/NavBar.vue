@@ -13,7 +13,7 @@
         </li>
       </ul>
     </div>
-    <div class="search-container">
+    <!-- <div class="search-container">
       <input placeholder="Search" />
     </div>
     <div class="playlists-container">
@@ -24,7 +24,7 @@
       <div class="list subtitle-text">
         <p class="hover-lighten" v-for="playlist in playlists" :key="playlist">{{ playlist }}</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

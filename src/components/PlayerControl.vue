@@ -112,6 +112,10 @@ export default {
     this.$refs.audioPlayer.addEventListener("pause", () => {
       this.isPlaying = false;
     });
+
+    this.$refs.audioPlayer.addEventListener("ended", () => {
+      this.playNext();
+    })
   },
 
   created() {
@@ -168,7 +172,7 @@ export default {
   z-index: 999;
   left: 0;
   position: fixed;
-  background: rgb(116, 35, 101);
+  background: rgb(2, 109, 133);
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -7,6 +7,8 @@
 				:title="artist.name"
 				:art="artist.art"
 				:desc="artist.desc"
+				:id="artist._id"
+				route="artist"
 			/>
 		</div>
 		<div class="entity-songs-list">

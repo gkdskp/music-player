@@ -1,24 +1,27 @@
 # music-player
 
+An Electron app to play your music files
+
+<p align="center">
+  <img height="450" src="./assets/ss.png">
+</p>
+
 ## Project setup
+
+Install the requirements
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+## To run
+
 ```
-yarn serve
+yarn electron:serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## To build
 
-### Lints and fixes files
 ```
-yarn lint
+yarn electron:build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

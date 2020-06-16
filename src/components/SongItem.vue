@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="song-item secondary-hoverable table seperated"
-		:class="{'album-view': isAlbumView}"
+		:class="{'album-view': isAlbumView, 'curr-song': file == currSong.file}"
 	>
 		<div class="song-info row">
 			<span class="song-track-num cell">{{ trackNum }}</span>
@@ -18,12 +18,15 @@
 			>
 				{{ songArtists }}
 			</span>
-			<span class="song-duration cell">{{ duration }}</span>
+			<span class="song-duration cell">{{ songDuration }}</span>
 		</div>
 	</div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+import {timeParse} from '../utils/timeparse';
+
 export default {
 	name: 'SongItem',
 	
@@ -41,7 +44,13 @@ export default {
 		//console.log(this.props);
 	},
 
-	methods: {
+	computed: {
+		...mapGetters(['currSong']),
+		songDuration() { return timeParse(this.duration * 10); },
+	},
+
+	updated() {
+		console.log(this.currSong);
 	}
 }
 </script>
@@ -73,5 +82,9 @@ export default {
 
 .song-item.album-view .song-title {
 	width: 86%;
+}
+
+.curr-song *{
+	color: #00B4DB;
 }
 </style>
