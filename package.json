@@ -14,6 +14,7 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.6.4",
+    "electron-main-window": "^1.0.4",
     "howler": "^2.2.0",
     "music-metadata": "^6.4.0",
     "nedb": "^1.8.0",

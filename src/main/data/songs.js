@@ -3,7 +3,9 @@ const { getAlbum, removeAlbum } = require('./albums');
 
 const DataStore = require('nedb');
 //const { app } = require('electron')
-const path = require('path')
+const path = require('path');
+const {newItem} = require('../utils');
+
 
 const songDataStore = new DataStore({
 	filename: path.join('Datastores/songs.db'), // TODO: Change to app.getPath('userData'), 
@@ -37,7 +39,7 @@ songDataStore.ensureIndex({ fieldName: 'file', unique: true }, function (err) {
 // This function does not return anything
 const addSong = song => {
 	getAlbum({ title: song.album, artist: song.albumartist })
-		.then(albumid => {
+		.then(async albumid => {
 			song.album = albumid;
 			delete song.albumartist;
 			songDataStore.update(
@@ -45,6 +47,11 @@ const addSong = song => {
 				{ $set: song },
 				{ upsert: true }
 			);
+			const songDoc = await findFile(song.file.name);
+			newItem({
+				type: 'song',
+				object: songDoc
+			})
 		})
 		.catch(err => console.log('Error adding song ' + song.title + ' ' + err));
 }

@@ -3468,6 +3468,11 @@ electron-download@^4.1.0, electron-download@^4.1.1:
     semver "^5.4.1"
     sumchecker "^2.0.2"
 
+electron-main-window@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/electron-main-window/-/electron-main-window-1.0.4.tgz#25842b2440d9a019d5e2ea023a499379ea0a64dd"
+  integrity sha512-6uAWFrT148AR4CO7fAHwxAODhsvzDevPOmPDUB5oqSeVTih+Ibj2YumYyksnhY+2GLSt0nAlHxtZWoWBJYI6zA==
+
 electron-publish@21.2.0:
   version "21.2.0"
   resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-21.2.0.tgz#cc225cb46aa62e74b899f2f7299b396c9802387d"

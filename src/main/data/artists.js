@@ -1,6 +1,7 @@
 const DataStore = require('nedb');
 // const { app } = require('electron');
 const path = require('path');
+const newItem = require('../utils');
 
 const artistDataStore = new DataStore({
 	filename: path.join(//app.getPath('userData'),
@@ -12,14 +13,21 @@ const artistDataStore = new DataStore({
 // Creates if artist does not exists
 const getArtist = artist => {
 	return new Promise(async (resolve, reject) => {
-		const artistDoc = await findArtist(artist);
-		if (!artistDoc) artistDataStore.update(
-			artist,
-			{ $set: artist },
-			{ upsert: true },
-		);
-		
-		resolve((await findArtist(artist))._id);
+		let artistDoc = await findArtist(artist);
+		if (!artistDoc) {
+			artistDataStore.update(
+				artist,
+				{ $set: artist },
+				{ upsert: true },
+			);
+			artistDoc = await findArtist(artist);
+			newItem({
+				type: 'artist',
+				object: artistDoc
+			});
+		}
+
+		resolve(artistDoc._id);
 	});
 }
 

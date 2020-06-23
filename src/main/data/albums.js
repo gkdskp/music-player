@@ -2,6 +2,7 @@ const DataStore = require('nedb');
 //const { app } = require('electron');
 const path = require('path')
 
+const newItem = require('../utils');
 const { getArtist, removeArtist } = require('./artists');
 
 const albumDataStore = new DataStore({
@@ -26,14 +27,21 @@ const getAlbum = album => {
 				const key = { title: album.title, artist: artistid };
 				album.artist = artistid;
 
-				const albumDoc = await findAlbum(key);
-				if (!albumDoc) albumDataStore.update(
-					key,
-					{ $set: album },
-					{ upsert: true },
-				);
+				let albumDoc = await findAlbum(key);
+				if (!albumDoc) {
+					albumDataStore.update(
+						key,
+						{ $set: album },
+						{ upsert: true },
+					);
+					albumDoc = await findAlbum(key);
+					newItem({
+						type: 'album',
+						object: albumDoc
+					});
+				}
 
-				resolve((await findAlbum(key))._id);
+				resolve(albumDoc._id);
 			})
 			.catch(err => reject(err));
 	});
