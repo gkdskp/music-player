@@ -23,8 +23,8 @@ export default {
 	},
 
 	created() {
-		ipcRenderer.send('find-albums');
-		ipcRenderer.once('albums-list', (event, args) => {
+		ipcRenderer.send('albums:all');
+		ipcRenderer.once('albums:res', (event, args) => {
 			console.log(args);
 			this.albums = args;
 		})
