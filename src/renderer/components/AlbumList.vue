@@ -8,7 +8,7 @@
 			<entity-item 
 				:title='album.title'
 				:art='album.art'
-				:subtitle='album.artist'
+				:subtitle='album.artist.name'
 				:id='album._id'
 				:isAlbumView='false'
 				:isCircular='false'

@@ -1,5 +1,5 @@
 <template>
-  <div id="control-container">
+  <div>
     <div class="info-container">
       <div class="song-art" v-if="currSong.file">
         <img :src="`file:///${currSong.albumArt}`" />
@@ -41,7 +41,7 @@
     </div>
     <div class="x"></div>
     <audio ref="audioPlayer" preload="auto">
-      <source :src="`file:///${currSong.file}`" type="audio/mpeg" />
+      <source :src="`file:///${currSong.file.name}`" type="audio/mpeg" />
     </audio>
   </div>
 </template>
@@ -164,19 +164,7 @@ export default {
 </script>
 
 <style scoped>
-#control-container {
-  width: 100%;
-  height: 10%;
-  top: 92vh;
-  bottom: 0;
-  z-index: 999;
-  left: 0;
-  position: fixed;
-  background: rgb(2, 109, 133);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+
 
 .song-art {
   position: relative;

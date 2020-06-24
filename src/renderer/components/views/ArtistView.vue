@@ -1,5 +1,5 @@
 <template>
-	<div class="route-container">
+	<div class="scontainer">
 		<div class="entity-info">
 			<entity-item
 				:isEntityView="true"
@@ -25,8 +25,8 @@
 
 <script>
 import { ipcRenderer } from 'electron';
-import EntityItem from '../components/EntityItem';
-import SongList from '../components/SongList';
+import EntityItem from '../EntityItem';
+import SongList from '../SongList';
 
 export default {
 	name: 'ArtistView',

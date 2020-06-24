@@ -4,15 +4,13 @@
     :class="{ singular: isEntityView, circular: isCircular }"
   >
     <div class="entity-container">
-      <div class="entity-art-container" @click='addSongs'>
-        <div
+      <div class="entity-art-container" @click="addSongs">
+        <!-- <div
           class="entity-art entity-inner"
           v-if="art"
-          :style="{ backgroundImage: `url('file:///${art}')` }"
-        ></div>
-        <div class="entity-inner button-container" v-if="!isEntityView || !art">
-          <ion-icon name="play-sharp" class="play-button"></ion-icon>
-        </div>
+          :style="{ backgroundImage: `url(${art})` }"
+        ></div> -->
+        <b-avatar :src="artwork" icon="music-note" :square="shape" :size="artsize"></b-avatar>
       </div>
 
       <div v-if="isEntityView">
@@ -47,16 +45,24 @@
 </template>
 
 <script>
+import getImage from "../utils/art";
+
 export default {
   name: "EntityItem",
+
+  data() {
+    return {
+      'artwork': ''
+    }
+  },
 
   props: [
     "isEntityView",
     "isCircular",
     "title",
     "subtitle",
-    "art",
     "subsubtitle",
+    "art",
     "desc",
     "id",
     "subid",
@@ -64,14 +70,38 @@ export default {
     "subroute",
   ],
 
+  computed: {
+    artsize() {
+      return (! this.isEntityView) ? '200px': '300px';
+    },
+
+    shape() {
+      return (this.route != 'artist') ? true: false;
+    }
+  },
+
+  created() {
+    if(! this.art) {
+      getImage(this.$store.getters.getOneFile(this.id)).then(art => {
+        this.artwork = art || '';
+        this.$store.commit('ADD_IMAGE', {
+          'id': this.id,
+          art
+        })
+      })
+    } else {
+      this.artwork = this.art;
+    }
+  },
+
   methods: {
     addSongs() {
-      this.$store.dispatch('addSongsByEntity', {
+      this.$store.dispatch("addSongsByEntity", {
         type: this.route,
-        id: this.id
-      })
-    }
-  }
+        id: this.id,
+      });
+    },
+  },
 };
 </script>
 
@@ -91,31 +121,6 @@ export default {
 .entity-container {
   display: flex;
   flex-direction: column;
-}
-
-.entity-art-container {
-  width: 200px;
-  height: 200px;
-  position: relative;
-}
-
-.entity-art {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  z-index: 5;
-}
-
-.entity-art-container .button-container {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.circular .entity-art-container .button-container {
-  border-radius: 50%;
-}
-
-.circular .entity-art {
-  border-radius: 50%;
 }
 
 .primary-btn {

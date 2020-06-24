@@ -1,5 +1,5 @@
 <template>
-	<div class="route-container">
+	<div class="scontainer">
 		<h1>Songs</h1>
 		<song-list
 			:isAlbumView="false"
@@ -10,7 +10,7 @@
 
 <script>
 import { ipcRenderer } from 'electron';
-import SongList from '../components/SongList';
+import SongList from '../SongList';
 
 export default {
 	name: 'SongsView',
@@ -19,10 +19,10 @@ export default {
 		'song-list': SongList
 	},
 
-	data() {
-		return {
-			songs: []
-		}
+	computed: {
+		songs(){ const songsList = this.$store.getters.getSongs
+		songsList.sort((a, b) => (a.title > b.title)? 1: -1);
+		return songsList }
 	},
 
 	created() {

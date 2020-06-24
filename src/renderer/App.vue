@@ -1,26 +1,27 @@
 <template>
   <div id="app">
     <nav-bar />
-    <router-view />
-    <player-control />
+    <router-view-container />
+    <playbar-container />
   </div>
 </template>
 
 <script>
-import NavBar from "./components/NavBar";
-import PlayerControl from './components/PlayerControl';
+import NavBar from "./components/layout/NavBar";
+import RouterViewContainer from './components/layout/RouteViewContainer';
+import PlaybarContainer from './components/layout/PlaybarContainer';
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
   name: "App",
 
   components: {
     "nav-bar": NavBar,
-    'player-control': PlayerControl,
+    'router-view-container': RouterViewContainer,
+    'playbar-container': PlaybarContainer,
   },
-
-  updated() {
-    console.log(window.location);
-  }
 };
 </script>
 

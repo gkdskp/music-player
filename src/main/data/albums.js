@@ -2,7 +2,7 @@ const DataStore = require('nedb');
 //const { app } = require('electron');
 const path = require('path')
 
-const newItem = require('../utils');
+const {newItem} = require('../utils');
 const { getArtist, removeArtist } = require('./artists');
 
 const albumDataStore = new DataStore({

@@ -1,10 +1,10 @@
 <template>
-  <div class="route-container">
+  <div class="scontainer">
     <div class="entity-info">
       <entity-item
         :isEntityView="true"
         :title="album.title"
-        :subtitle="album.artist"
+        :subtitle="album.artist.name"
         :subsubtitle="album.year"
         :art="album.art"
         :id="album._id"
@@ -22,10 +22,8 @@
 </template>
 
 <script>
-import {ipcRenderer} from 'electron';
-
-import EntityItem from "../components/EntityItem.vue";
-import SongList from "../components/SongList.vue";
+import EntityItem from "../EntityItem.vue";
+import SongList from "../SongList.vue";
 
 export default {
   name: "AlbumView",
@@ -35,18 +33,11 @@ export default {
     "song-list": SongList
   },
   
-  data() {
-    return {
-      album: {}
-    };
+   computed: {
+    album() {
+      console.log(this.$router);
+      return this.$store.getters.getAlbum(this.$route.params.id);
+    }
   },
-
-  created() {
-    ipcRenderer.send('find-album',  this.$route.params.id);
-    ipcRenderer.once('album-info', (event, args) => {
-      console.log(args);
-      this.album = args;
-    })
-  }
 };
 </script>

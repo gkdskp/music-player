@@ -13,6 +13,8 @@
   },
   "main": "background.js",
   "dependencies": {
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
     "core-js": "^3.6.4",
     "electron-main-window": "^1.0.4",
     "howler": "^2.2.0",
