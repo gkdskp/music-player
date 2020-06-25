@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ArtistList from '../ArtistList';
+import ArtistList from '../lists/ArtistList';
 
 export default {
 	name: 'ArtistsView',

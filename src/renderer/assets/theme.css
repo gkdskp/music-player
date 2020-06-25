@@ -92,8 +92,7 @@ input {
 }
 
 .primary-btn {
-  background: var(--primary-hover-color-fallback);
-  background: var(--primary-hover-color);
+ 
   width: 100%;
   border: 0;
   padding: 15px 15px;
@@ -104,10 +103,6 @@ input {
   font-family: "Gilroy";
 }
 
-.primary-btn:hover {
-  background: var(--btn-hover-color-fallback);
-  background: var(--btn-hover-color);
-}
 
 .block {
   display: block;

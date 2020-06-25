@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AlbumList from '../AlbumList';
+import AlbumList from '../lists/AlbumList';
 
 export default {
 	name: 'AlbumsView',

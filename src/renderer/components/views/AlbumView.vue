@@ -23,7 +23,7 @@
 
 <script>
 import EntityItem from "../EntityItem.vue";
-import SongList from "../SongList.vue";
+import SongList from "../lists/SongList.vue";
 
 export default {
   name: "AlbumView",

@@ -10,7 +10,7 @@
 
 <script>
 import { ipcRenderer } from 'electron';
-import SongList from '../SongList';
+import SongList from '../lists/SongList';
 
 export default {
 	name: 'SongsView',

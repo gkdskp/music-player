@@ -24,9 +24,8 @@
 </template>
 
 <script>
-import { ipcRenderer } from 'electron';
 import EntityItem from '../EntityItem';
-import SongList from '../SongList';
+import SongList from '../lists/SongList';
 
 export default {
 	name: 'ArtistView',
@@ -36,17 +35,9 @@ export default {
 		'song-list': SongList
 	},
 	
-	data() {
-		return {
-			artist: {}
-		}
-	},
 
-	created() {
-		ipcRenderer.send('find-artist', {_id: this.$route.params.id});
-		ipcRenderer.once('artist-info', (event, args) => {
-			this.artist = args;
-		})
+	computed: {
+		artist() { return this.$store.getters.getArtist(this.$route.params.id); }
 	}
 }
 </script>

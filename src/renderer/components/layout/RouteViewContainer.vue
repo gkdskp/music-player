@@ -2,11 +2,11 @@
 	<b-container 
 		class="main-container"
 		:class="{
-			'bottom-margin': isPlayerActive
+			'bottom-magin': isPlayerActive
 		}" 
 		fluid
 	>
-		<router-view />
+		<router-view class="router-container" />
 	</b-container>
 </template>
 
@@ -28,15 +28,20 @@ export default {
 
 <style scoped>
 .main-container {
-	left: 10vw;
-	width: 90vw;
+	left: 8vw;
+	width: 92vw;
 	height: 100vh;
 	position: relative;
+	padding-top: 30px;
 	margin: 0;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
-.bottom-margin {
+.main-container .router-container {
+	padding: 0vh 4vh;
+}
+
+.bottom-magin {
 	height: 92vh;
 }
 </style>

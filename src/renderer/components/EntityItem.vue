@@ -81,7 +81,7 @@ export default {
   },
 
   created() {
-    if(! this.art) {
+    if(! this.art && this.route == 'album') {
       getImage(this.$store.getters.getOneFile(this.id)).then(art => {
         this.artwork = art || '';
         this.$store.commit('ADD_IMAGE', {
@@ -108,7 +108,7 @@ export default {
 <style>
 .entity-item {
   display: inline-block;
-  margin: 0px 30px 60px 0px;
+  margin: 0px 30px 30px 0px;
   font-size: 0.9em;
   width: 200px;
   cursor: pointer;
@@ -157,8 +157,8 @@ export default {
 .entity-title {
   margin: 9px 0px 3px 0px;
   text-decoration: none;
-  font-weight: bolder;
   color: inherit;
+  font-weight: bold;
 }
 
 .circular .entity-title {

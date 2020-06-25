@@ -1,3 +1,5 @@
+import timeParse from '../utils/timeparse';
+
 const state = {
 	albums: [],
 }
@@ -12,7 +14,6 @@ const getters = {
 			state.albums.map(album => album.songs.map(
 				song => {
 					song.album = album.title;
-					song.performer = song.artists.join(',');
 					return song;
 				}
 			))
@@ -21,6 +22,14 @@ const getters = {
 
 	getArtists(state) {
 		return [...new Set(state.albums.map(album => album.artist))];
+	},
+
+	getArtist: (state) => (id) => {
+		console.log(id);
+		const albumsList = state.albums.filter(album => album.artist._id === id);
+		const artist = albumsList[0].artist;
+		artist.albums = albumsList;
+		return artist;
 	},
 
 	getAlbum: (state) => (id) => state.albums.find(album => album._id === id), 
@@ -36,7 +45,12 @@ const mutations = {
 	LOAD_INITIAL(state, payload) {
 		state.albums = payload.albums.map(album => {
 			album.artist = payload.artists.find(artist => artist._id === album.artist);
-			album.songs = payload.songs.filter(song => song.album === album._id);
+			album.songs = payload.songs.map(song => {
+				song.performer = song.artists.join(', ');
+				song.durationFormatted = timeParse(song.duration);
+				// song.duration = timeParse(song.duration);
+				return song;
+			}).filter(song => song.album === album._id);
 			return album;
 		});
 	},
