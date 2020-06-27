@@ -1,21 +1,20 @@
 <template>
-  <div>
-    <div class="info-container">
-      <div class="song-art" v-if="currSong.file">
-        <img :src="`file:///${currSong.albumArt}`" />
-      </div>
-      <div class="song-info" >
-        <span class="title">{{ currSong.title }}</span>
-        <span class="artist subtitle-text">{{ currSong.artist }}</span>
+  <div class="player-container">
+    <div class="left-container">
+      <div class="art"><b-avatar size="8vh" square :src="picture" /></div>
+      <div class="info">
+        <span class="title subtitle-text"> <b>{{ currSong.title }} </b></span>
+        <span class="performer subtitle-text">{{ currSong.performer }} </span>
       </div>
     </div>
-    <div class="actions-container">
-      <div class="controls-container">
+
+    <div class="center-container">
+       <div class="controls-container">
         <ion-icon name="play-back-sharp" class="play-button"></ion-icon>
         <ion-icon
           name="pause-sharp"
-          class="play-button"
           v-if="isPlaying"
+          class="play-button"
           @click="toggle"
         ></ion-icon>
         <ion-icon
@@ -26,7 +25,6 @@
         ></ion-icon>
         <ion-icon
           name="play-forward-sharp"
-          class="play-button"
           @click="playNext"
         ></ion-icon>
       </div>
@@ -39,7 +37,19 @@
         <div class="duration-info subtitle-text">{{ totalDuration }}</div>
       </div>
     </div>
-    <div class="x"></div>
+
+    <div class="right-container">
+     <ion-icon name="repeat-sharp"></ion-icon>
+        <ion-icon
+          name="shuffle-sharp"
+          @click="toggle"
+          class="center"
+        ></ion-icon>
+        <ion-icon
+          name="list-sharp"
+          v-b-toggle.sidebar-right
+        ></ion-icon>
+    </div>
     <audio ref="audioPlayer" preload="auto">
       <source :src="`file:///${currSong.file.name}`" type="audio/mpeg" />
     </audio>
@@ -47,10 +57,11 @@
 </template>
 
 <script>
-//import { AudioPlayer, PlayerEvents } from "../player/control";
-//import  PlayQueue  from '../player/playqueue';
-import { timeParse } from "../utils/timeparse";
+import timeParse from "../utils/timeparse";
+import art from "../utils/art";
+
 import { mapGetters } from "vuex";
+
 
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
@@ -68,41 +79,22 @@ export default {
       currentTime: "00:00",
       totalDuration: "00:00",
       progress: 0,
+      picture: ''
     };
   },
 
   computed: mapGetters(["playQueue", "currSong"]),
 
   mounted() {
-    //  PlayerEvents.on("player:loading", () => {
-    // });
-
-    // PlayerEvents.on("player:loaded", () => {
-    //   this.currSong = AudioPlayer.song;
-    //   this.totalDuration = AudioPlayer.totalDuration;
-    // });
-
-    // PlayerEvents.on("player:toggle", () => {
-    //   this.isPlaying = AudioPlayer.isPlaying;
-    // });
-
-    // PlayerEvents.on("player:playing", () => {
-    //   this.progress = AudioPlayer.progress;
-    //   this.currentTime = AudioPlayer.currentTime;
-    // });
-
-    // AudioPlayer.setAudioPlayer(this.$refs.audioPlayer);
-    // PlayQueue.setCurrent(0);
-    //this.totalDuration = '00:50';
     this.$refs.audioPlayer.addEventListener("timeupdate", () => {
-      this.currentTime = timeParse(this.$refs.audioPlayer.currentTime * 10);
-      this.progress =
+      this.currentTime = timeParse(this.$refs.audioPlayer.currentTime);
+      this.progress = 
         (this.$refs.audioPlayer.currentTime / this.$refs.audioPlayer.duration) *
-        100;
+        100 || 0;
     });
 
     this.$refs.audioPlayer.addEventListener("loadedmetadata", () => {
-      this.totalDuration = timeParse(this.$refs.audioPlayer.duration * 10);
+      this.totalDuration = timeParse(this.$refs.audioPlayer.duration);
     });
 
     this.$refs.audioPlayer.addEventListener("play", () => {
@@ -116,6 +108,7 @@ export default {
     this.$refs.audioPlayer.addEventListener("ended", () => {
       this.playNext();
     })
+    this.load();
   },
 
   created() {
@@ -124,25 +117,14 @@ export default {
   },
 
   methods: {
-    // replay() {
-    //   AudioPlayer.restart();
-    // },
-
     toggle() {
       !this.isPlaying ? this.$refs.audioPlayer.play() : this.$refs.audioPlayer.pause();
     },
 
-    // seek(newProgress) {
-    //   AudioPlayer.seek(newProgress);
-    // },
-
-    // next() {
-    //   PlayQueue.setNext();
-    // },
-
-    load(autoPlay) {
+    load() {
+      art(this.currSong.file.name).then(art => this.picture = art);
       this.$refs.audioPlayer.load();
-      if(autoPlay) this.$refs.audioPlayer.play();
+      this.$refs.audioPlayer.play();
     },
 
     playNext() {
@@ -152,43 +134,43 @@ export default {
 
     seek(value) {
       this.$refs.audioPlayer.currentTime = value * this.$refs.audioPlayer.duration/ 100;
-    }
+    },
+
+    
   },
 
   watch: {
-    currSong() {
-      this.load(true);
+    currSong(newSong, oldSong) {
+      if(newSong != oldSong) this.load(true);
     }
   }
 };
 </script>
 
 <style scoped>
-
-
-.song-art {
-  position: relative;
-  width: 100px;
-  height: 100%;
-}
-
-.song-art img {
-  left: 0;
-  height: 100%;
+.player-container {
   width: 100%;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
-.song-info {
-  position: absolute;
-  left: 120px;
+.left-container {
+  display: flex;
+  width: 500px;
   top: 6px;
+}
+
+.info {
+  display: flex;
+  margin-left: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.center-container {
+  width: 500px;
   display: flex;
   flex-direction: column;
-}
-
-.song-info .title {
-  font-weight: bolder;
 }
 
 .controls-container {
@@ -199,13 +181,6 @@ export default {
   font-weight: lighter;
 }
 
-.actions-container {
-  width: 500px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .slider-container {
   display: flex;
 }
@@ -214,7 +189,16 @@ export default {
   width: 90%;
   padding: 0px 10px;
 }
-.play-button {
-  padding: 0px 15px;
+.right-container {
+  font-size: 1.5em;
+  padding-right: 6px;
+  padding-top: 6px;
+  align-content: center;
+  width: 500px;
+  text-align: right;
+}
+
+.center {
+  padding: 0px 6px;
 }
 </style>

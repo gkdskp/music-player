@@ -1,6 +1,6 @@
 <template>
 	<div class="scontainer">
-		<h1>Artists</h1>
+		<h2>Artists</h2>
 		<artist-list :artists="artists" />
 	</div>
 </template>

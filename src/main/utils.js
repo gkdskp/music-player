@@ -11,4 +11,6 @@ const removeItem = item => {
 	//mainWindow.send('remove:item', item);
 }
 
+
+
 module.exports = { newItem, removeItem };

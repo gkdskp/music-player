@@ -1,5 +1,3 @@
-import { ipcRenderer } from 'electron';
-
 const state = {
 	queue: [],
 	currSongIndex: 0,
@@ -11,25 +9,19 @@ const getters = {
 };
 
 const actions = {
-	addSongsByEntity: ({ commit }, entity) => {
+	addSongsByEntity: ({ commit, getters }, entity) => {
+		if(entity.reset) 	commit('removeAll');
 		if (entity.type == 'album') {
-			ipcRenderer.send('find-album', entity.id);
-			ipcRenderer.once('album-info', (event, album) => {
-				commit('setSongs', album.songs);
-			});
+			commit('addSongs', getters.getAlbumSongs(entity.id));
 		} else if (entity.type == 'artist') {
-			commit('removeAll');
-			ipcRenderer.send('find-artist-songs', entity.id);
-			ipcRenderer.on('artist-songs', (event, songs) => {
-				console.log(songs);
-				commit('addSongs', songs);
-			})
+			commit('addSongs', getters.getArtistSongs(entity.id));
 		}
 	}
 };
 
 const mutations = {
 	addSongs: (state, songs) => {
+		console.log(state.queue);
 		state.queue = [
 			...state.queue,
 			...songs,
@@ -46,6 +38,10 @@ const mutations = {
 	setSong: (state, song) => {
 		state.queue = [song];
 		state.currSongIndex = 0;
+	},
+
+	setCurrent: (state, song) => {
+		state.currSongIndex = state.queue.indexOf(song)
 	},
 
 	playNext: (state) => {

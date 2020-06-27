@@ -5,11 +5,6 @@
   >
     <div class="entity-container">
       <div class="entity-art-container" @click="addSongs">
-        <!-- <div
-          class="entity-art entity-inner"
-          v-if="art"
-          :style="{ backgroundImage: `url(${art})` }"
-        ></div> -->
         <b-avatar :src="artwork" icon="music-note" :square="shape" :size="artsize"></b-avatar>
       </div>
 
@@ -22,16 +17,24 @@
           >{{ subtitle }}</router-link
         >
         <span class="subtitle-text block">{{ subsubtitle }}</span>
-        <button class="primary-btn" @click="addSongs">
+        <b-button-group class="btn primary-btn" >
+        <b-button variant="primary"  @click="addSongs(true)">
           <ion-icon name="play-sharp" />&nbsp;&nbsp;Play
-        </button>
+        </b-button>
+        <b-button  @click="addSongs">
+          <ion-icon name="shuffle-sharp" />&nbsp;&nbsp;Shuffle
+        </b-button>
+        <b-button  @click="addSongs(false)">
+          <ion-icon name="add-sharp" />&nbsp;&nbsp;Add
+        </b-button>
+        </b-button-group>
 
-        <p class="entity-desc">{{ desc }}</p>
       </div>
       <div v-else>
         <router-link
           :to="{ name: route, params: { id: id } }"
           class="entity-title block"
+          :class="{'current': current}"
           >{{ title }}</router-link
         >
         <router-link
@@ -45,7 +48,7 @@
 </template>
 
 <script>
-import getImage from "../utils/art";
+import getImage from '../utils/art';
 
 export default {
   name: "EntityItem",
@@ -77,6 +80,11 @@ export default {
 
     shape() {
       return (this.route != 'artist') ? true: false;
+    },
+
+    current() {
+      const currSong = this.$store.getters.currSong;
+      return currSong && currSong.album === this.id;
     }
   },
 
@@ -89,16 +97,19 @@ export default {
           art
         })
       })
+    } else if(this.route == 'artist') {
+      this.artwork = `file:///home/gokul/Code/music-player/images/${this.id}.jpeg`
     } else {
       this.artwork = this.art;
     }
   },
 
   methods: {
-    addSongs() {
+    addSongs(reset) {
       this.$store.dispatch("addSongsByEntity", {
         type: this.route,
         id: this.id,
+        reset
       });
     },
   },
@@ -128,13 +139,6 @@ export default {
   cursor: pointer;
 }
 
-.entity-art-container .play-button {
-  width: 50%;
-  height: 50%;
-  top: 25%;
-  left: 25%;
-  position: absolute;
-}
 
 .total-songs {
   float: right;
@@ -202,4 +206,5 @@ export default {
 .entity-item.singular .entity-artist {
   font-size: 1.2em;
 }
+
 </style>

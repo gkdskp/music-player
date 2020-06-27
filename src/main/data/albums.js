@@ -1,12 +1,12 @@
 const DataStore = require('nedb');
-//const { app } = require('electron');
+const { app } = require('electron');
 const path = require('path')
 
 const {newItem} = require('../utils');
 const { getArtist, removeArtist } = require('./artists');
 
 const albumDataStore = new DataStore({
-	filename: path.join( //app.getPath('userData'),
+	filename: path.join( app.getPath('userData'),
 		'Datastores/albums.db'),
 	autoload: true
 });

@@ -17,7 +17,7 @@ export default {
 
 	computed: {
 		isPlayerActive() {
-			return this.$store.getters.currSong == null
+			return this.$store.getters.currSong.file != null;
 		}
 	}
 
@@ -33,7 +33,8 @@ export default {
   z-index: 29999;
   left: 0;
   position: fixed;
-  background: rgb(2, 109, 133);
+  background: var(--blue);
+  color: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

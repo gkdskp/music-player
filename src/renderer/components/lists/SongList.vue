@@ -1,56 +1,38 @@
 <template>
   <div class="list-container" :class="{ 'album-view': isAlbumView }">
-    <!-- <div class="sticky-top">
-			<h1 v-if="title" class="list-title">{{ title }}</h1> -->
-    <!-- <div
-				class="table seperated subtitle-text"
-				:class="{'album-view': isAlbumView}"
-			>
-				<div class="row">
-					<div class="num-cell cell">#</div>
-					<div class="title-cell cell">TITLE</div>
-					<div 
-						class="album-cell cell subtitle-text"
-						v-if="!isAlbumView"
-					>ALBUM</div>
-					<div 
-						class="artists-cell cell subtitle-text"
-						v-if="!isAlbumView"
-					>ARTISTS</div>
-					<div class="duration-cell cell">DURATION</div>
-				</div>
-			</div>
-		</div>
-		<div class="songs-list">
-			<song-item
-				v-for="(song, index) in songs"
-				:key="index"
-				:isAlbumView="isAlbumView"
-				:trackNum="isAlbumView? (`${song.track.no}` || index+1): index+1"
-				:title="song.title"
-				:songAlbum="song.album"
-				:songArtists="song.performer"
-				:file="song.file.name"
-				:duration="song.duration"
-				@click.native="setSong(song)"
-			/>
-		</div> -->
-    <b-table :items="songs" :fields="fields" sort-icon-left striped hover>
+    <b-table
+      :items="songsList"
+      :caption-html="titleFormatted"
+      caption-top
+      striped
+      :fields="fields"
+      :tbody-tr-class="current"
+      sort-icon-left
+      hover
+      @row-clicked="setSong"
+    >
       <template v-slot:cell(index)="data">
         {{ data.index + 1 }}
       </template>
-      <template v-slot:cell(duration)="data">
-        {{ data.item.duration }}
+
+      <template v-slot:cell(title)="data">
+        <Texst :text="data.item.title"></Texst>
+      </template>
+
+      <template v-slot:cell(album)="data">
+        <Texst :text="getAlbumName(data.item.album)"></Texst>
       </template>
     </b-table>
   </div>
 </template>
 
 <script>
+import Texst from "../Text";
+
 export default {
   name: "SongList",
 
-  props: ["isAlbumView", "title", "songs"],
+  props: ["isAlbumView", "title", "songs", "clickToSet"],
 
   data() {
     return {
@@ -88,13 +70,43 @@ export default {
     };
   },
 
+  computed: {
+    titleFormatted() {
+      return this.title ? `<h4>${this.title}</h4>` : "";
+    },
+    songsList() {
+      return this.songs;
+    },
+  },
+
   components: {
     // 'song-item': SongItem
+    Texst,
+  },
+
+  methods: {
+    getAlbumName(id) {
+      return this.$store.getters.getAlbumName(id);
+    },
+
+    setSong(data) {
+      console.log(this.clickToSet)
+      if (!this.clickToSet) this.$store.commit("setCurrent", data);
+      else this.$store.commit("setSong", data);
+    },
+
+    current(song) {
+      if (song === this.$store.getters.currSong) return "current";
+    },
   },
 };
 </script>
 
 <style>
+table {
+  cursor: pointer;
+}
+
 .num-cell {
   width: 7% !important;
 }
@@ -114,5 +126,9 @@ export default {
 
 .album-view .album-cell {
   display: none;
+}
+
+.current * {
+  color: #00b4db !important;
 }
 </style>

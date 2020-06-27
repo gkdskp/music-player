@@ -21,7 +21,7 @@ export default {
 	},
 
 	computed: {
-		isPlayerActive() { return this.$store.getters.currSong == null; }
+		isPlayerActive() { return this.$store.getters.currSong.file != null; }
 	}
 }
 </script>

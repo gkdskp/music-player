@@ -1,15 +1,15 @@
 <template>
 	<div class="scontainer">
-		<h1>Songs</h1>
+		<h2>Songs</h2>
 		<song-list
 			:isAlbumView="false"
 			:songs="songs"
+			:clickToSet="true"
 		/>
 	</div>
 </template>
 
 <script>
-import { ipcRenderer } from 'electron';
 import SongList from '../lists/SongList';
 
 export default {
@@ -20,17 +20,10 @@ export default {
 	},
 
 	computed: {
-		songs(){ const songsList = this.$store.getters.getSongs
-		songsList.sort((a, b) => (a.title > b.title)? 1: -1);
+		songs(){ console.log('Accessing'); const songsList = this.$store.getters.getSongs
 		return songsList }
 	},
 
-	created() {
-		ipcRenderer.send('find-songs');
-		ipcRenderer.once('songs-list', (event, args) => {
-			console.log(args);
-			this.songs = args
-		})
-	}
+	
 }
 </script>

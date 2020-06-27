@@ -11,12 +11,12 @@
         route="album"
         :desc="album.desc"
         subroute="artist"
-        :subid="album.artistid"
+        :subid="album.artist._id"
         class="album-info"
       />
     </div>
     <div class="entity-songs-list">
-      <song-list :isAlbumView="true" :songs="album.songs" class="song-list-item" />
+      <song-list :isAlbumView="true" :songs="songs" :clickToSet="true" class="song-list-item" />
     </div>
   </div>
 </template>
@@ -35,8 +35,11 @@ export default {
   
    computed: {
     album() {
-      console.log(this.$router);
       return this.$store.getters.getAlbum(this.$route.params.id);
+    },
+
+    songs() {
+      return this.$store.getters.getAlbumSongs(this.$route.params.id);
     }
   },
 };

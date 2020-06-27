@@ -22,8 +22,8 @@ new Vue({
   render: h => h(App),
 
   created() {
-    ipcRenderer.send('fetch:all');
-    ipcRenderer.once('res:all', (event, args) => {
+    ipcRenderer.send('albums:all');
+    ipcRenderer.once('albums:list', (event, args) => {
       store.commit('LOAD_INITIAL', args);
     })
   }

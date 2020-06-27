@@ -5,7 +5,7 @@
 				:isEntityView="true"
 				:isCircular="true"
 				:title="artist.name"
-				:art="artist.art"
+				:art="albums[0].art"
 				:desc="artist.desc"
 				:id="artist._id"
 				route="artist"
@@ -13,11 +13,12 @@
 		</div>
 		<div class="entity-songs-list">
 			<song-list
-				v-for="(album, index) in artist.albums"
+				v-for="(album, index) in albums"
 				:key="index"
 				:isAlbumView="true"
 				:title="album.title"
 				:songs="album.songs"
+				:clickToSet="true"
 			/>
 		</div>
 	</div>
@@ -37,7 +38,12 @@ export default {
 	
 
 	computed: {
-		artist() { return this.$store.getters.getArtist(this.$route.params.id); }
+		artist() { 
+			return this.$store.getters.getArtist(this.$route.params.id); 
+		},
+		albums() {
+			return this.$store.getters.getArtistAlbums(this.$route.params.id);
+		}
 	}
 }
 </script>
