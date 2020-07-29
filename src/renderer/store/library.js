@@ -6,10 +6,14 @@ const state = {
 
 const getters = {
 	getAlbums(state) {
+		state.albums.sort((albumA, albumB) => {
+			return albumA.year - albumB.year;
+		});
 		return state.albums;
 	},
 
 	getSongs(state) {
+		
 		return state.songs;
 	},
 
@@ -18,7 +22,7 @@ const getters = {
 	},
 
 	getAlbumName: (state) => (id) =>
-		state.albums.find(album => album._id === id).title,
+		state.albums.find(album => album._id === id)?.title,
 
 	getAlbum: (state) => (id) =>
 		state.albums.find(album => album._id === id),
@@ -53,7 +57,6 @@ const actions = {
 const mutations = {
 	LOAD_INITIAL(state, payload) {
 		state.albums = payload.albums.map(album => {
-			//return Object.freeze(album);
 			return album;
 		});
 		state.artists = payload.artists;

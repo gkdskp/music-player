@@ -1,0 +1,38 @@
+$primary-bg: #23272A;
+$secondary-bg: #36393F;
+
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-vue/src/index.scss";
+
+body {
+  margin: 0;
+  background-color: $primary-bg;
+  color: var(--white);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-color);
+}
+
+.b-sidebar-body {
+  background-color: $secondary-bg;
+}
+
+.b-sidebar-body a {
+	color: var(--white);
+}
+
+.list-container table {
+	background: inherit;
+}
+
+.list-container table tr:focus {
+	outline: none !important;
+}

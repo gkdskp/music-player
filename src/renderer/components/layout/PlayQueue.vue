@@ -1,5 +1,5 @@
 <template>
-	<b-sidebar id="sidebar-right" title="Queue" width="1500px" no-close-on-backdrop="false"  right shadow>
+	<b-sidebar id="sidebar-right" title="Queue" width="1500px" right shadow>
 		<song-list :songs="songs" />
     </b-sidebar>
 </template>

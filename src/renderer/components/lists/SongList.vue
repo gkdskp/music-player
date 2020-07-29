@@ -4,9 +4,9 @@
       :items="songsList"
       :caption-html="titleFormatted"
       caption-top
-      striped
       :fields="fields"
       :tbody-tr-class="current"
+      dark
       sort-icon-left
       hover
       @row-clicked="setSong"
@@ -32,7 +32,7 @@ import Texst from "../Text";
 export default {
   name: "SongList",
 
-  props: ["isAlbumView", "title", "songs", "clickToSet"],
+  props: ["isAlbumView", "title", "songs", "clickToSet", "isPlayQueue"],
 
   data() {
     return {
@@ -106,6 +106,7 @@ export default {
 table {
   cursor: pointer;
 }
+
 
 .num-cell {
   width: 7% !important;

@@ -3,6 +3,8 @@ const { getAllArtists } = require('../data/artists');
 const fs = require('fs');
 const request = require('request');
 
+const { CLIENT_ID, CLIENT_SECRET } = require('../config.json');
+
 const fetchArtistImages = async () => {
 	const artists = await getAllArtists();
 	artists.forEach(artist => {
@@ -16,9 +18,12 @@ const fetchArtistImages = async () => {
 }
 
 const downloadImage = (artist) => {
+	if(! (API_KEY && API_SECRET))
+		return;
+
 	const spotify = new Spotify({
-		id: 'YOUR_SPOTIFY_CLIENT_ID',
-		secret: 'YOUR_SPOTIFY_CLIENT_SECRET'
+		id: CLIENT_ID,
+		secret: CLIENT_SECRET
 	});
 	
 	spotify.search({ type: 'artist', query: artist.name, limit: 1}, (err, data) => {

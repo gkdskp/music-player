@@ -28,6 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "./assets/colors.scss";
 @import url("./assets/theme.css");
 </style>

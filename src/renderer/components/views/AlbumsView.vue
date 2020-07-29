@@ -10,15 +10,24 @@ import AlbumList from '../lists/AlbumList';
 
 export default {
 	name: 'AlbumsView',
+
+	data() {
+		return {
+		}
+	},
 	
 	computed: {
-		albums() {
-			return this.$store.getters.getAlbums;
-		}
+			albums() { 
+				return this.$store.getters.getAlbums; 
+			}
 	},
 
 	components: {
 		'album-list': AlbumList
 	},
+
+	activated() {
+		console.log("Hello");
+	}
 }
 </script>

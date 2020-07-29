@@ -19,11 +19,18 @@ export default {
 		'song-list': SongList
 	},
 
-	computed: {
-		songs(){ console.log('Accessing'); const songsList = this.$store.getters.getSongs
-		return songsList }
+	data() {
+		return {
+		}
 	},
 
+	computed: {
+		songs() { return this.$store.getters.getSongs; }
+	},
+
+	activated() {
+		console.log('Ok');
+	}
 	
 }
 </script>

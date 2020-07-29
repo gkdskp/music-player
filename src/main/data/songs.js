@@ -38,7 +38,7 @@ songDataStore.ensureIndex({ fieldName: 'file', unique: true }, function (err) {
 // Songs must be checked for duplicates before insertion
 // This function does not return anything
 const addSong = song => {
-	getAlbum({ title: song.album, artist: song.albumartist })
+	getAlbum({ title: song.album, artist: song.albumartist, year: song.year })
 		.then(async albumid => {
 			song.album = albumid;
 			delete song.albumartist;

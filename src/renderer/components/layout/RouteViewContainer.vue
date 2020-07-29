@@ -6,7 +6,9 @@
 		}" 
 		fluid
 	>
-		<router-view class="router-container" />
+		<keep-alive :include="keepAlive">
+			<router-view class="router-container" />
+		</keep-alive>
 	</b-container>
 </template>
 
@@ -15,6 +17,12 @@ import { BContainer } from 'bootstrap-vue';
 
 export default {
 	name: 'RouterViewContainer',
+
+	data() {
+		return {
+			keepAlive: ["SongsView", "AlbumsView", "ArtistsView"]
+		}
+	},
 
 	components: {
 		'b-container': BContainer

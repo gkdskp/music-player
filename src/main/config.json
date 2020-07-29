@@ -1,4 +1,7 @@
 {
-	"LIBRARY_FOLDERS": ["/home/gokul/Music"],
-	"SUPPORTED_FILE_EXTS": [".mp3", ".wav", ".ogg", ".flac", ".webm"]
+	"LIBRARY_FOLDERS": ["/path/to/folder"],
+	"SUPPORTED_FILE_EXTS": [".mp3", ".wav", ".ogg", ".flac", ".webm"],
+
+	"CLIENT_ID": "YOUR_SPOTIFY_CLIENT_ID",
+	"CLIENT_SECRET": "YOUR_SPOTIFY_CLIENT_SECRET"
 }

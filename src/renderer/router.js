@@ -16,6 +16,7 @@ export default new VueRouter({
 		},
 		{
 			path: '/songs/',
+			name: "songs",
 			component: SongsView
 		},
 		{
@@ -25,10 +26,12 @@ export default new VueRouter({
 		},
 		{
 			path: '/artists',
+			name: "artists",
 			component: ArtistsView,
 		},
 		{
 			path: '/album',
+			name: "albums",
 			component: AlbumsView,
 		},
 		{

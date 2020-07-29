@@ -5,9 +5,6 @@ const { getAllArtists, findArtist } = require('./data/artists');
 const { getAllSongs, findSong } = require('./data/songs');
 
 import timeParse from '../renderer/utils/timeparse';
-import art from './art';
-
-console.log(getAllAlbums);
 
 
 

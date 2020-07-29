@@ -1,54 +1,17 @@
-@import url("./light.css");
-
-body {
-  background: var(--primary-background-color);
-  font-family: "Open Sans";
-  color: var(--text-color);
-  align-content: center;
-}
-
-/* Display */
-.table {
-  display: table;
-  table-layout: fixed;
-}
-
-.row {
-  display: table-row;
-}
-
-.cell {
-  display: table-cell;
-  word-wrap: break-word;
-  padding: 2px;
-}
-
+/* Sidebar navigation */
 .b-sidebar-outer {
   width: 8vw;
-  float: left;
-  background: gray;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
-::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-color);
-}
 
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb-color);
+.list-container td {
+  vertical-align: middle;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover-color);
-}
-
-/* Custom Colors */
-.secondary-bg {
-  background: var(--secondary-background-color);
-}
-
+body { font-family: 'Open Sans';}
 /* Text Styles */
 h1,
 h2,

@@ -1,6 +1,6 @@
 <template>
   <b-sidebar class="sidenav" id="navbar" width="8vw" visible no-header no-close-on-esc no-close-on-route-change>
-    <b-nav vertical class="w-100" pills>
+    <b-nav vertical class="w-100 bg-dark" pills>
       <b-nav-item to="/album" active-class="active">
         <ion-icon name="albums-sharp"></ion-icon> Albums
       </b-nav-item>
