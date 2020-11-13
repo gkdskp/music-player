@@ -20,7 +20,10 @@ class SidebarLayout extends StatelessWidget {
       body: Row(
         children: <Widget>[
           Sidebar(),
-          child
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: child,
+          )
         ],
       ),
       floatingActionButton: floatingActionButton,

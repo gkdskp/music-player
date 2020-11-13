@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music/theme/theme.dart';
 import 'package:music/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,8 +15,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SidebarLayout(
-      child: Container(
-        child: Text('Hi'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          PlaylistList()
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},

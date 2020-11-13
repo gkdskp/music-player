@@ -146,7 +146,7 @@ class _SidebarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color color =
-        (isActive) ? Palette.SIDEBAR_ACTIVE_FG_COLOR : Palette.SIDEBAR_FG_COLOR;
+        (isActive) ? Palette.ACCENT_COLOR : Palette.SIDEBAR_FG_COLOR;
     return ListTile(
       leading: Icon(
         iconData,
